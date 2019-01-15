@@ -1,0 +1,60 @@
+{
+	"apiVersion": "admission.k8s.io/v1beta1",
+	"kind": "AdmissionReview",
+	"request": {
+		"kind": {
+			"group": "",
+			"kind": "Pod",
+			"version": "v1"
+		},
+		"userInfo": {
+			"groups": [],
+			"username": "alicia"
+		},
+		"operator": "CREATE",
+		"object": {
+			"spec": {
+				"containers": [
+					{
+						"image": "nginx",
+						"name": "nginx",
+						"securityContext": {
+							"privileged": true
+						},
+						"resources": {
+							"limits": {
+								"memory": "256T"
+							}
+						}
+					},
+					{
+						"image": "opa:0.10.3",
+						"name": "nginx",
+						"securityContext": {
+							"privileged": true
+						},
+						"resources": {
+							"limits": {
+								"memory": "128M"
+							}
+						}
+					}
+				],
+				"initContainers": [
+					{
+						"image": "hooli.com/security-init",
+						"name": "init-myservice",
+						"securityContext": {
+							"privileged": true
+						},
+						"resources": {
+							"limits": {
+								"memory": "56G"
+							}
+						}
+					}
+				]
+			}
+		}
+	}
+}

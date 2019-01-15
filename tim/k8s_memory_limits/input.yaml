@@ -1,0 +1,22 @@
+sampleinput:
+  operation: CREATE
+  userinfo:
+    username: alice
+  object:
+    kind: Pod
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        securityContext:
+          privileged: true
+        resources:
+            limits:
+              memory: 256T
+      - image: opa
+        name: opa
+        securityContext:
+          privileged: true
+        resources:
+            limits:
+              memory: 128M
